@@ -14,7 +14,7 @@ jobs:
         with:
           ruby-version: '2.7'
       - run: |
-          gem build bearer-agent.gemspec
+          gem build bearer_cli.gemspec
           /bin/bash bin/setup-credentials
           gem push *.gem
         env:

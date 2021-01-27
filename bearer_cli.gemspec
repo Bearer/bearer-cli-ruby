@@ -1,7 +1,7 @@
 require_relative 'lib/bearer_cli/version'
 require_relative 'lib/bearer_cli/update_cli_service'
 
-Gem.post_install do
+Gem.pre_install do
   puts "Installing bearer-cli to #{Gem.bindir}"
   BearerCli::UpdateCliService.run(Gem.bindir)
 end

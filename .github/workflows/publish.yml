@@ -1,0 +1,21 @@
+on:
+  create:
+   tags:
+    - release-v*
+name: Publish
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Publish
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+      - run: |
+          gem build bearer-agent.gemspec
+          /bin/bash bin/setup-credentials
+          gem push *.gem
+        env:
+         RUBYGEMS_AUTH_TOKEN: ${{ secrets.RUBYGEMS_AUTH_TOKEN }}
